@@ -1,0 +1,173 @@
+<md-dialog aria-label="Create"  ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Plan</h2>
+        <span flex></span>
+        <!--<md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>-->
+      </div>
+    </md-toolbar>
+    
+
+    <!--start sidenav-->
+    <div  layout="column" style="height:700px; width:1000px;" ng-cloak>
+  <section layout="row" flex>
+    <md-sidenav class="md-sidenav-left " md-component-id="left" md-is-locked-open="true">
+      
+      <md-content layout-padding >
+        <md-datepicker ng-model="plan.date" md-placeholder="Enter date"></md-datepicker>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Meal Time</label>
+            <md-select ng-model="plan.mealTime">
+              <md-option ng-repeat="meal in mealTimes" value="{{meal.abbrev}}">
+                {{meal.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+               <label>Number of People</label>
+          <div layout>
+          <md-slider flex min="0" max="20" ng-model="plan.numPeople" aria-label="people" id="num-people" class="md-primary">
+          </md-slider>
+            <div flex="20" layout-margin layout-align="center center">
+                <input flex type="number" ng-model="plan.numPeople" aria-label="people" aria-controls="num-people">
+            </div>
+          </div>
+          </md-input-container>
+
+          <!--start autocomplete-->
+         <md-chips ng-model="ctrl.selectedTags" md-autocomplete-snap
+              md-transform-chip="ctrl.transformChip($chip)"
+              md-require-match="ctrl.autocompleteDemoRequireMatch">
+      <md-autocomplete
+          md-selected-item="ctrl.selectedItem"
+          md-search-text="ctrl.searchText"
+          md-items="item in ctrl.querySearch(ctrl.searchText)"
+          md-item-text="item.name"
+          placeholder="Add a tag">
+        <span md-highlight-text="ctrl.searchText">{{item.name}} :: {{item.type}}</span>
+      </md-autocomplete>
+      <md-chip-template>
+        <span>
+          <strong>{{$chip.name}}</strong>
+          <em>({{$chip.type}})</em>
+        </span>
+      </md-chip-template>
+    </md-chips>
+    <md-checkbox ng-model="ctrl.autocompleteDemoRequireMatch">
+      Tell the autocomplete to require a match (when enabled you cannot create new chips)
+    </md-checkbox>
+      <!--end autocomlete-->
+      <md-button ng-click="jsonpTest()">Search</md-button>
+      </md-content>
+    </md-sidenav>
+      <div layout="column" layout-fill layout-align="top center">
+       
+<!--end Sidenav-->
+
+<!--Start Card area-->
+
+    <md-content flex layout-padding ng-repeat="card in cards" class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      
+      <md-card >
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{ card.id }}</span>
+            <span class="md-subhead">Large</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+      </div>
+      <!--<md-card>
+
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with  image</span>
+            <span class="md-subhead">Extra Large</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+          <div class="md-media-xl card-media"></div>
+          <md-card-actions layout="column">
+            <md-button class="md-icon-button" aria-label="Favorite">
+              <md-icon md-svg-icon=""></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Settings">
+              <md-icon md-svg-icon=""></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Share">
+              <md-icon md-svg-icon=""></md-icon>
+            </md-button>
+          </md-card-actions>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with image</span>
+            <span class="md-subhead">Small</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with image</span>
+            <span class="md-subhead">Medium</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-md card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>-->
+
+    </div>
+ 
+  
+<!--Edn card Area-->
+   
+      </div>
+      <div flex></div>
+    </md-content>
+  </section>
+</div>
+
+    
+    <md-dialog-actions layout="row">
+      <md-button >
+        More on Pinterest
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="answer('canceled!')">
+       Cancel
+      </md-button>
+      <md-button ng-click="planMeal(plan)" style="margin-right:20px;">
+        Create
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
