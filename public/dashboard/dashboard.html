@@ -1,58 +1,35 @@
+<div>
 <!--toolbar start-->
-<md-toolbar md-scroll-shrink>
-  <div class="md-toolbar-tools">Cookterest</div>
+<md-toolbar class=" md-display-3">
+  <div class="md-toolbar-tools md-display-3" layout-align="center center">Meal Planner</div>
 </md-toolbar>
 <!--toolbar end-->
 
-<!--FAB-floating action button start-->
- 
-      <md-fab-speed-dial md-direction="left" class="md-fab-bottom-right md-fling" >
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-warn">
-            <md-icon md-svg-src=""></md-icon>
-          </md-button>
-        </md-fab-trigger>
-        <md-fab-actions>
-          <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="" aria-label="Twitter"></md-icon>
-          </md-button>
-          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="" aria-label="Facebook"></md-icon>
-          </md-button>
-          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="" aria-label="Google Hangout"></md-icon>
-          </md-button>
-        </md-fab-actions>
-      </md-fab-speed-dial>
-    <!--</div>-->
-<!--FAB-floating action button end-->
 
 <!--main layout start-->
-<div layout="row">
+<div layout="row" layout-xs="column">
   <!--Side Bar start-->
-  <div layout="column" flex="30" layout-fill flex-sm="100" ng-cloak>
-    <md-content style="height: 92vh;" class="md-whiteframe-24dp">
+  <div layout="column" flex="30" layout-fill flex-xs="100" flex-sm="100" ng-cloak>
+    <md-content  class="md-whiteframe-24dp">
      <div layout="column">
       <md-button ng-click="showAdd($event)">ADD</md-button>
-      <md-button ng-click="jsonpTest()">CREATE</md-button>
+      <md-button ng-click="showAlert($event)">CREATE</md-button>
       <md-button ng-click="showPlan($event)">PLAN</md-button>
-      <md-button>SHOP</md-button>
+      <md-button ng-click="showAlert($event)">SHOP</md-button>
      </div>
       <md-list>
         <!--Active work orders start-->
         <section>
           <md-subheader>Planned Meals</md-subheader>
-          <md-list-item ng-repeat="meal in meals" ng-click="sideBarInfo($event, $index)">
+          <md-list-item ng-repeat="meal in meals" ng-href="{{ meal.foodSelected[0].url }}">
             <div layout="row" layout-fill>
               <md-icon ng-if="meals[$index].mealTime === 'Breakfast'" md-svg-src="cloud.svg"></md-icon>
               <md-icon ng-if="meals[$index].mealTime === 'Lunch'" md-svg-src="grain.svg"></md-icon>
               <md-icon ng-if="meals[$index].mealTime === 'Dinner'" md-svg-src="InvertColors.svg"></md-icon>
-              <div class="md-headline title" flex> {{ meal.date }} </div>
+              <div class="md-headline title" flex> {{ meal.foodSelected[0].metadata.recipe.name }} </div>
               <div layout="row">
                 <div class="md-body-1 subhead actFields" flex>
-                  <md-chips class="chipShadow">
-                    <md-chip class="chipSizeChange"><strong>{{ meals[$index].foodSelected[0].name }}</strong> (<em>{{ meals[$index].foodSelected[0].cookTime }}</em>)</md-chip>
-                  </md-chips>
+                  
                 </div>
                 <div class="numFields" ng-if="orders[$index].numFields - 1 > 0">+{{meals[$index].size()}}</div>
               </div>
@@ -67,3 +44,4 @@
         <!--Active work orders end-->
       </md-list>
     </md-content>
+  </div>

@@ -1,113 +1,94 @@
-<md-dialog aria-label="Create"  ng-cloak>
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Plan</h2>
-        <span flex></span>
-        <!--<md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-        </md-button>-->
-      </div>
-    </md-toolbar>
-    
-
-    <!--start sidenav-->
-    <div  layout="column" style="height:700px; width:1000px;" ng-cloak>
-  <section layout="row" flex>
-    <md-sidenav class="md-sidenav-left " md-component-id="left" md-is-locked-open="true">
-      
-      <md-content layout-padding >
-        <md-datepicker ng-model="plan.date" md-placeholder="Enter date"></md-datepicker>
-
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Meal Time</label>
-            <md-select ng-model="plan.mealTime">
-              <md-option ng-repeat="meal in mealTimes" value="{{meal.abbrev}}">
-                {{meal.abbrev}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-          <md-input-container class="md-block" flex-gt-sm>
-               <label>Number of People</label>
-          <div layout>
-          <md-slider flex min="0" max="20" ng-model="plan.numPeople" aria-label="people" id="num-people" class="md-primary">
-          </md-slider>
-            <div flex="20" layout-margin layout-align="center center">
-                <input flex type="number" ng-model="plan.numPeople" aria-label="people" aria-controls="num-people">
+<md-dialog aria-label="Create" ng-cloak>
+    <form>
+        <md-toolbar class="md-tall">
+            <div class="md-toolbar-tools">
+                <h2>Plan</h2>
             </div>
-          </div>
-          </md-input-container>
 
-          <!--start autocomplete-->
-         <md-chips ng-model="ctrl.selectedTags" md-autocomplete-snap
-              md-transform-chip="ctrl.transformChip($chip)"
-              md-require-match="ctrl.autocompleteDemoRequireMatch">
-      <md-autocomplete
-          md-selected-item="ctrl.selectedItem"
-          md-search-text="ctrl.searchText"
-          md-items="item in ctrl.querySearch(ctrl.searchText)"
-          md-item-text="item.name"
-          placeholder="Add a tag">
-        <span md-highlight-text="ctrl.searchText">{{item.name}} :: {{item.type}}</span>
-      </md-autocomplete>
-      <md-chip-template>
-        <span>
-          <strong>{{$chip.name}}</strong>
-          <em>({{$chip.type}})</em>
-        </span>
-      </md-chip-template>
-    </md-chips>
-    <md-checkbox ng-model="ctrl.autocompleteDemoRequireMatch">
-      Tell the autocomplete to require a match (when enabled you cannot create new chips)
-    </md-checkbox>
-      <!--end autocomlete-->
-      <md-button ng-click="jsonpTest()">Search</md-button>
-      </md-content>
-    </md-sidenav>
-      <div layout="column" layout-fill layout-align="top center">
-       
-<!--end Sidenav-->
+            <div layout>
 
-<!--Start Card area-->
+                <span flex></span>
+                <md-button ng-click="cancel()">
+                    Cancel
+                </md-button>
+                <md-button ng-click="planMeal(plan)" style="margin-right:20px;">
+                    Create
+                </md-button>
+            </div>
+        </md-toolbar>
 
-    <md-list-item flex layout-padding ng-repeat="card in cards" class="md-padding" layout-xs="column" layout="row">
-   
-      <md-card >
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{ card.id }} gh</span>
-            <span class="md-subhead">Large</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-lg card-media"></div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
-      </md-card>
-     
-    </md-list-item>
-     
-<!--Edn card Area-->
-   
-     
-  </section>
-</div>
+        <div layout layout-wrap>
+            <!--start sidenav-->
+            <div layout="column" ng-cloak>
+                <md-sidenav class="md-sidenav-left " md-component-id="left" md-is-locked-open="true">
+                    <md-content layout-padding>
+                        <md-datepicker ng-model="plan.date" md-placeholder="Enter date"></md-datepicker>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Meal Time</label>
+                            <md-select ng-model="plan.mealTime">
+                                <md-option ng-repeat="meal in mealTimes" value="{{meal.abbrev}}">
+                                    {{meal.abbrev}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Number of People</label>
+                            <div layout>
+                                <md-slider flex min="0" max="20" ng-model="plan.numPeople" aria-label="people" id="num-people" class="md-primary">
+                                </md-slider>
+                                <div flex="20" layout-margin layout-align="center center">
+                                    <input flex type="number" ng-model="plan.numPeople" aria-label="people" aria-controls="num-people">
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <!--start autocomplete-->
+                        <md-chips ng-model="ctrl.selectedTags" md-autocomplete-snap md-transform-chip="ctrl.transformChip($chip)" md-require-match="ctrl.autocompleteDemoRequireMatch">
+                            <md-autocomplete md-selected-item="ctrl.selectedItem" md-search-text="ctrl.searchText" md-items="item in ctrl.querySearch(ctrl.searchText)"
+                                md-item-text="item.name" placeholder="Add a tag">
+                                <span md-highlight-text="ctrl.searchText">{{item.name}} :: {{item.type}}</span>
+                            </md-autocomplete>
+                            <md-chip-template>
+                                <span>
+                                <strong>{{$chip.name}}</strong>
+                                <em>({{$chip.type}})</em>
+                            </span>
+                            </md-chip-template>
+                        </md-chips>
+                        <md-checkbox ng-model="ctrl.autocompleteDemoRequireMatch">
+                            Tell the autocomplete to require a match (when enabled you cannot create new chips)
+                        </md-checkbox>
+                        <!--end autocomlete-->
+                        <md-button ng-click="jsonpTest()">Search</md-button>
+                    </md-content>
+                </md-sidenav>
+            </div>
+            <!--end Sidenav-->
 
-    
-    <md-dialog-actions layout="row">
-      <md-button >
-        More on Pinterest
-      </md-button>
-      <span flex></span>
-      <md-button ng-click="answer('canceled!')">
-       Cancel
-      </md-button>
-      <md-button ng-click="planMeal(plan)" style="margin-right:20px;">
-        Create
-      </md-button>
-    </md-dialog-actions>
-  </form>
+            <!--Start Card area-->
+            <div layout layout-wrap>
+
+                <md-list-item ng-repeat="card in cards">
+
+                    <md-card>
+                        <md-card-content>
+                        <span class="md-content">{{ card.metadata.recipe.name }}</span>
+                        </md-card-content>
+                        <md-card-title-media>
+                            <div class="md-media-lg card-media"></div>
+                        </md-card-title-media>
+
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button ng-href="{{ card.url }}">Open</md-button>
+                            <md-button ng-click="addFood($index)">Add</md-button>
+                        </md-card-actions>
+                    </md-card>
+                </md-list-item>
+            </div>
+
+            <!--Edn card Area-->
+        </div>
+
+
+
+    </form>
 </md-dialog>
